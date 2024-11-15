@@ -37,6 +37,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   url_strategy: ^0.3.0
   google_fonts: ^6.2.1
+  js: ^0.7.1
+  lucide_icons: ^0.257.0
+  gap: ^3.0.1
+  chiclet: ^1.2.0
+  awesome_extensions: ^2.0.19
+  url_launcher: ^6.3.1
+  styled_text: ^8.1.0
+  responsive_grid: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +69,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/google_fonts/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
