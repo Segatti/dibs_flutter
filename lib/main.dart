@@ -1679,7 +1679,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {
                                           launchUrl(
                                             Uri.parse(
-                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%202x%20na%20semana!"),
+                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%202x%20na%20semana!"),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           );
@@ -1781,7 +1781,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {
                                           launchUrl(
                                             Uri.parse(
-                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%201x%20na%20semana!"),
+                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%201x%20na%20semana!"),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           );
