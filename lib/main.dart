@@ -743,7 +743,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           const Gap(16),
                           Expanded(
                             child: Image.asset(
-                              "assets/images/mapa.png",
+                              "assets/images/mapaNew.png",
                             ),
                           ),
                         ],
