@@ -3,14 +3,18 @@ import 'dart:math';
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:chiclet/chiclet.dart';
 import 'package:dibs_flutter/app_color.dart';
+import 'package:dibs_flutter/models/feedback_model.dart';
 import 'package:dibs_flutter/widgets/check_item_text.dart';
+import 'package:dibs_flutter/widgets/custom_scroll_behavior.dart';
 import 'package:dibs_flutter/widgets/menu_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_text/styled_text.dart' as styled;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int cursoIndex = 0;
   int investTab = 0;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  int indexFeedback = 0;
 
   GlobalKey dibsKey = GlobalKey();
   GlobalKey equipeKey = GlobalKey();
@@ -69,6 +74,47 @@ class _MyHomePageState extends State<MyHomePage> {
     "        Ao final deste nível, você terá a confiança necessária para dar suas opiniões sobre temas que domina, compartilhar experiências do passado e falar sobre seus desejos e objetivos. Estará preparado para viajar com fluência, sabendo pedir ajuda, dar e entender direções, além de conversar tranquilamente com falantes de inglês sem grandes preocupações. Imagine discutir filmes que assistiu, descrever viagens incríveis ou planejar suas próximas aventuras internacionais, tudo isso em inglês! \n\n        Este é o passo que conecta você ao mundo. Venha avançar e expandir seus horizontes!",
     "        Ao concluir este nível, você estará pronto para dominar conversas com nuances e falas implícitas, expressando suas opiniões com clareza e confiança em contextos acadêmicos e profissionais. Imagine participar de reuniões, debates ou apresentações, transmitindo suas ideias de forma segura e impactante. Este é o momento em que seu inglês alcança um novo patamar, permitindo que você se destaque em ambientes exigentes e esteja preparado para desafios globais. \n\n        Venha superar barreiras e mostrar todo o seu potencial!",
     "        Ao finalizar este nível, você terá completado todo o curso e se tornado um verdadeiro especialista na Língua Inglesa! Como um falante avançado, estará confiante em suas habilidades linguísticas e preparado para se comunicar com facilidade em qualquer situação, seja em contextos profissionais, acadêmicos ou sociais. Imagine participar de reuniões importantes, discutir temas complexos ou viajar pelo mundo com fluência e naturalidade. Este é o momento de celebrar sua conquista e abrir portas para novas oportunidades. \n\n        Você está prestes a dominar o inglês de forma definitiva!",
+  ];
+
+  var feedbacks = [
+    const FeedbackModel(
+      name: "Dennys",
+      job: "Engenheiro de Materiais",
+      message:
+          "Há exatamente um mês atrás eu embarcava para uma das maiores aventuras de minha vida: conhecer a Disney e os EUA! E quem diria que eu conseguiria desenrolar conversando em inglês durante o período que passaria lá? Com certeza a @dibsinglesonline_ ! Obrigado por todo apoio, vocês foram essenciais e hoje com certeza eu posso afirmar: I speak English, very well!",
+      photo: "assets/images/depoimento1.png",
+    ),
+    const FeedbackModel(
+      name: "Érika Tallyta",
+      job: "Doutora em Química",
+      message:
+          "Eu estudei inglês em diferentes escolas há 10 anos. Nunca consegui concluir nenhum curso, pois sempre me desmotivada por não ver meu progresso. Na DIBS a metodologia exige bastante o que me faz ter vontade de participar das aulas, e como é focado em conversação consegui ver uma grande evolução da minha parte.",
+      photo: "assets/images/depoimento2.jpeg",
+      alignment: Alignment.topCenter,
+    ),
+    const FeedbackModel(
+      name: "Glauber Matheus Fonseca",
+      job: "Professor de Ciências",
+      message:
+          "Achei maravilhoso, eu senti que evoluir demais na língua inglesa com vocês, hoje é muito mais fácil entender algo em inglês, antes tinha muita dificuldade, a didática é uma das que mais gosto, pois sai do tradicional onde é muito cansativo na minha opinião, a todas as pessoas que me perguntam, sempre indico vocês ❤️.",
+      photo: "assets/images/depoimento3.jpeg",
+      alignment: Alignment.centerRight,
+    ),
+    const FeedbackModel(
+      name: "Giovanna Barbosa",
+      job: "Advogada",
+      message:
+          "A Dibs é um escola muito especial, com didática impecável e diversa, transformando a aprendizagem em um processo prazeroso! Tive a melhor das experiências de ensino com vocês.",
+      photo: "assets/images/depoimento4.jpeg",
+      alignment: Alignment.topLeft,
+    ),
+    const FeedbackModel(
+      name: "Mariley Wegner",
+      job: "Estudante de Medicina",
+      message:
+          "Preciso agradecer essa experiência durante esse ano! Quando minha amiga me indicou a Dibs eu lembro que cancelei o contrato da outra escola porque ficamos super empolgadas com a proposta! E realmente a metodologia de ensino faz jus a todo o resultado obtido! E a ansiedade para dar continuidade é cada dia maior... para aumentar os aprendizados e minha fluência 🧡💛.",
+      photo: "assets/images/depoimento5.jpeg",
+    ),
   ];
 
   void scrollToTop() {
@@ -1185,6 +1231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: investKey,
                 width: double.infinity,
                 alignment: Alignment.center,
+                constraints: BoxConstraints(minHeight: size.height - 110),
                 decoration: const BoxDecoration(
                   color: AppColor.backgroundColor,
                 ),
@@ -1608,158 +1655,159 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Gap(32),
                       const Text(
                         "Cartão de crédito (cobrança recorrente), boleto ou pix (5% de desconto até o vencimento).",
+                        textAlign: TextAlign.center,
                       ).fontWeight(FontWeight.w600),
                       const Gap(32),
-                      Container(
-                        width: size.width *
-                            responsiveValue(context, xs: 1, sm: .8),
-                        height: responsiveValue(context, xs: 350, md: 300),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.grey,
-                          ),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset.zero,
-                              blurRadius: 20,
-                              color: Colors.black26,
-                            ),
-                          ],
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.all(5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: IntrinsicHeight(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    "assets/images/curso_viagem.jpg",
-                                    height: 250,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            IntrinsicHeight(
-                              child: Container(
-                                // height: 250,
-                                width: 5,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: IntrinsicHeight(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    color: AppColor.backgroundColor,
-                                    padding: const EdgeInsets.all(8),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Gap(8),
-                                        const Text(
-                                          "Curso de inglês para viagem",
-                                          style: TextStyle(height: 1),
-                                          textAlign: TextAlign.center,
-                                        )
-                                            .fontSize(22)
-                                            .fontWeight(FontWeight.bold)
-                                            .textColor(Colors.black),
-                                        const Gap(16),
-                                        const Text("Duração: Até 5 mês")
-                                            .fontSize(16)
-                                            .fontWeight(FontWeight.w500),
-                                        const Gap(8),
-                                        Text("Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                            .fontSize(14)
-                                            .fontWeight(FontWeight.bold),
-                                        const Gap(16),
-                                        responsiveValue(
-                                          context,
-                                          xs: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text("R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
-                                                  .fontSize(22)
-                                                  .fontWeight(FontWeight.bold),
-                                              const Gap(8),
-                                              Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
-                                                  .fontSize(18)
-                                                  .fontWeight(FontWeight.w400),
-                                            ],
-                                          ),
-                                          md: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text("R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
-                                                  .fontSize(22)
-                                                  .fontWeight(FontWeight.bold),
-                                              const Gap(8),
-                                              Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
-                                                  .fontSize(18)
-                                                  .fontWeight(FontWeight.w400),
-                                            ],
-                                          ),
-                                        ),
-                                        const Gap(16),
-                                        Row(
-                                          children: [
-                                            const Gap(16),
-                                            Expanded(
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.white,
-                                                  foregroundColor:
-                                                      AppColor.primary,
-                                                  fixedSize:
-                                                      const Size.fromHeight(50),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      side: const BorderSide(
-                                                        color: AppColor.primary,
-                                                        width: 2,
-                                                      )),
-                                                ),
-                                                onPressed: () {
-                                                  launchUrl(
-                                                    Uri.parse(
-                                                        "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20em%20${investTab == 0 ? 'grupo' : 'dupla'}%20para%20viagem!"),
-                                                    mode: LaunchMode
-                                                        .externalApplication,
-                                                  );
-                                                },
-                                                child: const Text("Contratar")
-                                                    .fontWeight(FontWeight.bold)
-                                                    .fontSize(18),
-                                              ),
-                                            ),
-                                            const Gap(8),
-                                          ],
-                                        ),
-                                        const Gap(16),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   width: size.width *
+                      //       responsiveValue(context, xs: 1, sm: .8),
+                      //   height: responsiveValue(context, xs: 350, md: 300),
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     border: Border.all(
+                      //       width: 2,
+                      //       color: Colors.grey,
+                      //     ),
+                      //     boxShadow: const [
+                      //       BoxShadow(
+                      //         offset: Offset.zero,
+                      //         blurRadius: 20,
+                      //         color: Colors.black26,
+                      //       ),
+                      //     ],
+                      //     color: Colors.white,
+                      //   ),
+                      //   padding: const EdgeInsets.all(5),
+                      //   child: Row(
+                      //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                      //     children: [
+                      //       Expanded(
+                      //         flex: 2,
+                      //         child: IntrinsicHeight(
+                      //           child: ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Image.asset(
+                      //               "assets/images/curso_viagem.jpg",
+                      //               height: 250,
+                      //               fit: BoxFit.cover,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       IntrinsicHeight(
+                      //         child: Container(
+                      //           // height: 250,
+                      //           width: 5,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //         flex: 3,
+                      //         child: IntrinsicHeight(
+                      //           child: ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Container(
+                      //               color: AppColor.backgroundColor,
+                      //               padding: const EdgeInsets.all(8),
+                      //               child: Column(
+                      //                 mainAxisSize: MainAxisSize.min,
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.center,
+                      //                 children: [
+                      //                   const Gap(8),
+                      //                   const Text(
+                      //                     "Curso de inglês para viagem",
+                      //                     style: TextStyle(height: 1),
+                      //                     textAlign: TextAlign.center,
+                      //                   )
+                      //                       .fontSize(22)
+                      //                       .fontWeight(FontWeight.bold)
+                      //                       .textColor(Colors.black),
+                      //                   const Gap(16),
+                      //                   const Text("Duração: Até 5 mês")
+                      //                       .fontSize(16)
+                      //                       .fontWeight(FontWeight.w500),
+                      //                   const Gap(8),
+                      //                   Text("Salas com até ${investTab == 0 ? '4' : '2'} alunos")
+                      //                       .fontSize(14)
+                      //                       .fontWeight(FontWeight.bold),
+                      //                   const Gap(16),
+                      //                   responsiveValue(
+                      //                     context,
+                      //                     xs: Column(
+                      //                       mainAxisAlignment:
+                      //                           MainAxisAlignment.center,
+                      //                       children: [
+                      //                         Text("R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
+                      //                             .fontSize(22)
+                      //                             .fontWeight(FontWeight.bold),
+                      //                         const Gap(8),
+                      //                         Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
+                      //                             .fontSize(18)
+                      //                             .fontWeight(FontWeight.w400),
+                      //                       ],
+                      //                     ),
+                      //                     md: Row(
+                      //                       mainAxisAlignment:
+                      //                           MainAxisAlignment.center,
+                      //                       children: [
+                      //                         Text("R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
+                      //                             .fontSize(22)
+                      //                             .fontWeight(FontWeight.bold),
+                      //                         const Gap(8),
+                      //                         Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
+                      //                             .fontSize(18)
+                      //                             .fontWeight(FontWeight.w400),
+                      //                       ],
+                      //                     ),
+                      //                   ),
+                      //                   const Gap(16),
+                      //                   Row(
+                      //                     children: [
+                      //                       const Gap(16),
+                      //                       Expanded(
+                      //                         child: ElevatedButton(
+                      //                           style: ElevatedButton.styleFrom(
+                      //                             backgroundColor: Colors.white,
+                      //                             foregroundColor:
+                      //                                 AppColor.primary,
+                      //                             fixedSize:
+                      //                                 const Size.fromHeight(50),
+                      //                             shape: RoundedRectangleBorder(
+                      //                                 borderRadius:
+                      //                                     BorderRadius.circular(
+                      //                                         10),
+                      //                                 side: const BorderSide(
+                      //                                   color: AppColor.primary,
+                      //                                   width: 2,
+                      //                                 )),
+                      //                           ),
+                      //                           onPressed: () {
+                      //                             launchUrl(
+                      //                               Uri.parse(
+                      //                                   "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20em%20${investTab == 0 ? 'grupo' : 'dupla'}%20para%20viagem!"),
+                      //                               mode: LaunchMode
+                      //                                   .externalApplication,
+                      //                             );
+                      //                           },
+                      //                           child: const Text("Contratar")
+                      //                               .fontWeight(FontWeight.bold)
+                      //                               .fontSize(18),
+                      //                         ),
+                      //                       ),
+                      //                       const Gap(8),
+                      //                     ],
+                      //                   ),
+                      //                   const Gap(16),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       const Gap(64),
                     ],
                   ),
@@ -1790,6 +1838,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: AppColor.primary,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
+                          height: 1,
                         ),
                         tags: {
                           "bold": styled.StyledTextTag(
@@ -1801,6 +1850,259 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         },
                       ),
+                      const Gap(64),
+                      Expanded(
+                        child: SizedBox(
+                          width: 800,
+                          child: ScrollConfiguration(
+                            behavior: CustomScrollBehavior(),
+                            child: PageView.builder(
+                              onPageChanged: (value) {
+                                setState(() {
+                                  indexFeedback = value;
+                                });
+                              },
+                              itemCount: feedbacks.length,
+                              itemBuilder: (context, index) {
+                                var feedback = feedbacks[index];
+                                return Card(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16),
+                                    child: Row(
+                                      children: [
+                                        AspectRatio(
+                                          aspectRatio: responsiveValue(context,
+                                              xs: 9 / 16, md: 12 / 16, xl: 1),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.asset(
+                                              feedback.photo,
+                                              fit: BoxFit.cover,
+                                              alignment: feedback.alignment,
+                                            ),
+                                          ),
+                                        ),
+                                        const Gap(16),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.all(16),
+                                            child: Column(
+                                              children: [
+                                                Text(feedback.name)
+                                                    .fontSize(20)
+                                                    .fontWeight(FontWeight.bold)
+                                                    .textColor(Colors.black),
+                                                const Gap(8),
+                                                Text(feedback.job)
+                                                    .fontSize(18)
+                                                    .fontWeight(FontWeight.w600)
+                                                    .textColor(
+                                                        AppColor.secondary),
+                                                const Gap(16),
+                                                Expanded(
+                                                  child: SingleChildScrollView(
+                                                    physics:
+                                                        const BouncingScrollPhysics(),
+                                                    child: Text(
+                                                      feedback.message,
+                                                    ).fontSize(16).fontWeight(
+                                                        FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Gap(16),
+                      AnimatedSmoothIndicator(
+                        activeIndex: indexFeedback,
+                        count: feedbacks.length,
+                        effect: WormEffect(
+                          activeDotColor: responsiveValue(context,
+                              xs: AppColor.tertiary, xl: AppColor.primary),
+                          dotColor: Colors.white,
+                        ),
+                      ),
+                      const Gap(32),
+                      ChicletOutlinedAnimatedButton(
+                        backgroundColor: const Color(0xFF24cf5f),
+                        borderColor: const Color(0xFF24cf5f).darken(2),
+                        buttonColor: const Color(0xFF24cf5f).darken(20),
+                        buttonHeight: 10,
+                        width: 400,
+                        height: 60,
+                        onPressed: () {
+                          launchUrl(
+                            Uri.parse(
+                                "https://open.spotify.com/playlist/591Anp20c5C2So0EY6dIJn?si=1Ig5xaiNRlCqy2bczKAZHg"),
+                            mode: LaunchMode.externalApplication,
+                          );
+                        },
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.spotify,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            Gap(16),
+                            Text(
+                              "Ouça nossa Playlist",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Gap(16),
+                      ChicletOutlinedAnimatedButton(
+                        backgroundColor: colorScheme.secondary,
+                        borderColor: colorScheme.secondary.darken(2),
+                        buttonColor: colorScheme.secondary.darken(20),
+                        buttonHeight: 10,
+                        width: 400,
+                        height: 60,
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  width: MediaQuery.sizeOf(context).width * .8,
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 800,
+                                    maxHeight: 800,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Gap(30),
+                                          const Text("Lojinha da Dibs")
+                                              .fontSize(24),
+                                          MouseRegion(
+                                            cursor: SystemMouseCursors.click,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Icon(
+                                                LucideIcons.x,
+                                                size: 30,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const Gap(16),
+                                      const Divider(
+                                        height: 1,
+                                        thickness: 1,
+                                        color: Colors.grey,
+                                      ),
+                                      const Gap(16),
+                                      Expanded(
+                                        child: SingleChildScrollView(
+                                          child: Wrap(
+                                            spacing: 32,
+                                            runSpacing: 32,
+                                            children: [
+                                              SizedBox(
+                                                width: 200,
+                                                height: 300,
+                                                child: MouseRegion(
+                                                  cursor:
+                                                      SystemMouseCursors.click,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      launchUrl(
+                                                        Uri.parse(
+                                                            "https://hotm.art/todolist2024"),
+                                                        mode: LaunchMode
+                                                            .externalApplication,
+                                                      );
+                                                    },
+                                                    child: Image.asset(
+                                                      "assets/images/todolist.jpeg",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 200,
+                                                height: 300,
+                                                child: MouseRegion(
+                                                  cursor:
+                                                      SystemMouseCursors.click,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      launchUrl(
+                                                        Uri.parse(
+                                                            "https://hotm.art/plannerdeingles"),
+                                                        mode: LaunchMode
+                                                            .externalApplication,
+                                                      );
+                                                    },
+                                                    child: Image.asset(
+                                                      "assets/images/planner.jpeg",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              LucideIcons.store,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                            Gap(16),
+                            Text(
+                              "Lojinha da Dibs",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Gap(32),
                     ],
                   ),
                 ),
@@ -1819,7 +2121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   constraints: const BoxConstraints(maxWidth: 1024),
                   child: Column(
                     children: [
-                      const Gap(64),
+                      const Gap(32),
                       styled.StyledText(
                         text: "Ficou com alguma dúvida?",
                         textAlign: TextAlign.center,
@@ -1838,7 +2140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         },
                       ),
-                      const Gap(64),
+                      const Gap(32),
                       Row(
                         children: [
                           Expanded(
@@ -2042,18 +2344,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       const Text(
-                              "Segunda a Sexta 8h às 20h • Horário de Brasília")
+                        "Segunda a Sexta 8h às 20h • Horário de Brasília",
+                        textAlign: TextAlign.center,
+                      )
                           .textColor(Colors.white)
                           .fontSize(16)
                           .fontWeight(FontWeight.w600),
                       const Gap(16),
                       const Text(
-                              "ceo@dibsinglesonline.com - CNPJ: 44.174.762/0001-80")
+                        "ceo@dibsinglesonline.com - CNPJ: 44.174.762/0001-80",
+                        textAlign: TextAlign.center,
+                      )
                           .textColor(Colors.white)
                           .fontSize(16)
                           .fontWeight(FontWeight.w600),
                       const Gap(16),
-                      const Text("© 2025 Dibs. Todos direitos reservados.")
+                      const Text(
+                        "© 2025 Dibs. Todos direitos reservados.",
+                        textAlign: TextAlign.center,
+                      )
                           .textColor(Colors.white)
                           .fontSize(16)
                           .fontWeight(FontWeight.w600)
