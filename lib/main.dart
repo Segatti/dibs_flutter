@@ -571,11 +571,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                             child:
                                                 ChicletOutlinedAnimatedButton(
                                               backgroundColor:
-                                                  colorScheme.secondary,
-                                              borderColor: colorScheme.secondary
-                                                  .darken(2),
-                                              buttonColor: colorScheme.secondary
-                                                  .darken(20),
+                                                  const Color(0xFF25d366),
+                                              borderColor:
+                                                  const Color(0xFF25d366)
+                                                      .lighten(50),
+                                              buttonColor:
+                                                  const Color(0xFF25d366)
+                                                      .darken(20),
                                               buttonHeight: 10,
                                               width: 400,
                                               height: 60,
@@ -587,13 +589,25 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       .externalApplication,
                                                 );
                                               },
-                                              child: const Text(
-                                                "Quero me matricular",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 24,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                              child: const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  FaIcon(
+                                                    FontAwesomeIcons.whatsapp,
+                                                    color: Colors.white,
+                                                    size: 40,
+                                                  ),
+                                                  Gap(8),
+                                                  Text(
+                                                    "Entrar em contato",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
