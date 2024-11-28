@@ -12,17 +12,10 @@ class CheckItemText extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          padding: const EdgeInsets.all(4),
-          child: Icon(
-            LucideIcons.checkSquare,
-            color: colorScheme.secondary,
-            size: 40,
-          ),
+        Icon(
+          LucideIcons.check,
+          color: colorScheme.secondary,
+          size: 40,
         ),
         const Gap(16),
         Flexible(

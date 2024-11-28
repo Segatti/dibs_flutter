@@ -9,6 +9,7 @@ import 'package:dibs_flutter/widgets/custom_scroll_behavior.dart';
 import 'package:dibs_flutter/widgets/menu_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int investTab = 0;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   int indexFeedback = 0;
+  PageController pageController = PageController(initialPage: 0);
 
   GlobalKey dibsKey = GlobalKey();
   GlobalKey equipeKey = GlobalKey();
@@ -596,11 +598,51 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       const Gap(16),
                                       const Text(
-                                        "* Só ganha o certificado se você finalizar todo o curso.",
+                                        "* O Certificado é emitido ao finalizar o nivel de inglês avançado.",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
                                         ),
+                                      ),
+                                      const Gap(64),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          MouseRegion(
+                                            cursor: SystemMouseCursors.click,
+                                            child: GestureDetector(
+                                              behavior:
+                                                  HitTestBehavior.translucent,
+                                              onTap: () {
+                                                final context =
+                                                    dibsKey.currentContext;
+                                                if (context != null) {
+                                                  Scrollable.ensureVisible(
+                                                    context,
+                                                    duration: const Duration(
+                                                        milliseconds: 500),
+                                                    curve: Curves.easeInOut,
+                                                  );
+                                                }
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  const Text("Saiba mais")
+                                                      .fontSize(20)
+                                                      .textColor(Colors.white)
+                                                      .fontWeight(
+                                                          FontWeight.bold),
+                                                  const Icon(
+                                                    LucideIcons.chevronDown,
+                                                    size: 50,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       const Gap(32),
                                     ],
@@ -782,7 +824,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     padding: const EdgeInsets.all(16),
                                     child: Text(
-                                      "Nossos professores são especialistas no ensino da língua inglesa, com excelência comprovada. \n\nTodos possuem formação superior e fluência avançada em inglês, prontos para ajudar você a alcançar seus objetivos.",
+                                      "Nossos professores são especialistas no ensino da língua inglesa, com excelência comprovada. \n\nTodos possuem formação superior e fluência em inglês, prontos para ajudar você a alcançar seus objetivos.",
                                       textAlign: TextAlign.start,
                                       style: GoogleFonts.montserrat(
                                         fontSize: 24,
@@ -1141,12 +1183,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             const Gap(64),
                             styled.StyledText(
-                              text: "Curso de <bold>Inglês para Viagem</bold>",
+                              text: "<bold>Inglês para Viagem</bold>",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.montserrat(
                                 color: Colors.white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
+                                shadows: [
+                                  const Shadow(
+                                    color: Colors.black54,
+                                    offset: Offset.zero,
+                                    blurRadius: 4,
+                                  ),
+                                ],
                               ),
                               tags: {
                                 "bold": styled.StyledTextTag(
@@ -1198,7 +1247,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     padding: const EdgeInsets.all(16),
                                     child: styled.StyledText(
                                       text:
-                                          "<bold>Prepare-se para a sua próxima viagem com confiança!</bold>  \n\nAprenda tudo o que você precisa para se comunicar com fluência em inglês durante suas aventuras. Este curso é totalmente focado em situações reais enfrentadas por viajantes, como no aeroporto, avião, imigração, hotel e muito mais!  \n\n<bold>O que você vai levar na bagagem do conhecimento?</bold>\n\n- Planner de viagem: organize cada detalhe da sua jornada.\n- Material de aula exclusivo: para estudar em qualquer lugar.\n- Checklist de viagem: para não esquecer nada essencial.\n- Planner de orçamento: controle seus gastos com facilidade.\n\nDomine o inglês de viagem e aproveite cada momento sem barreiras! 🌍✈️",
+                                          "<bold>Prepare-se para a sua próxima viagem com confiança!</bold>  \n\nAprenda tudo o que você precisa para se comunicar com fluência em inglês durante suas aventuras. Este curso é totalmente focado em situações reais enfrentadas por viajantes, como no aeroporto, avião, imigração, hotel e muito mais!  \n\n<bold>O que você vai levar na bagagem do conhecimento?</bold>\n\n- Planner de viagem: organize cada detalhe da sua jornada.\n- Material de aula exclusivo: para estudar em qualquer lugar.\n- Checklist de viagem: para não esquecer nada essencial.\n- Planner de orçamento: planeje seus gastos com facilidade.\n\nDomine o inglês de viagem e aproveite cada momento sem barreiras! 🌍✈️",
                                       textAlign: TextAlign.justify,
                                       style: GoogleFonts.montserrat(
                                         color: Colors.white,
@@ -1284,14 +1333,28 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  LucideIcons.users2,
-                                  color: investTab == 0
-                                      ? Colors.black
-                                      : Colors.white,
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: SvgPicture.asset(
+                                    "assets/icons/community.svg",
+                                    width: 30,
+                                    height: 30,
+                                    colorFilter: ColorFilter.mode(
+                                      (investTab == 0)
+                                          ? Colors.black
+                                          : Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
                                 ),
-                                const Gap(8),
-                                const Text('Aulas em Grupo')
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(8),
+                                ),
+                                Text(responsiveValue(context,
+                                        xs: 'Grupo', md: 'Aulas em Grupo'))
                                     .textColor(
                                       investTab == 0
                                           ? Colors.black
@@ -1299,7 +1362,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                     )
                                     .fontWeight(FontWeight.w600)
                                     .fontSize(16),
-                                const Gap(16),
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(16),
+                                ),
                               ],
                             ),
                           ),
@@ -1310,14 +1377,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  LucideIcons.user2,
-                                  color: investTab == 1
-                                      ? Colors.black
-                                      : Colors.white,
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: Icon(
+                                    LucideIcons.users2,
+                                    color: investTab == 1
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
                                 ),
-                                const Gap(8),
-                                const Text('Aulas em Dupla')
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(8),
+                                ),
+                                Text(responsiveValue(context,
+                                        xs: 'Dupla', md: 'Aulas em Dupla'))
                                     .textColor(
                                       investTab == 1
                                           ? Colors.black
@@ -1325,7 +1401,55 @@ class _MyHomePageState extends State<MyHomePage> {
                                     )
                                     .fontWeight(FontWeight.w600)
                                     .fontSize(16),
-                                const Gap(16),
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(16),
+                                ),
+                              ],
+                            ),
+                          ),
+                          2: Container(
+                            height: 36,
+                            width: 200,
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: Icon(
+                                    LucideIcons.user2,
+                                    color: investTab == 2
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(8),
+                                ),
+                                Text(
+                                  responsiveValue(
+                                    context,
+                                    xs: 'Individual',
+                                    md: 'Aulas Individuais',
+                                  ),
+                                )
+                                    .textColor(
+                                      investTab == 2
+                                          ? Colors.black
+                                          : Colors.white,
+                                    )
+                                    .fontWeight(FontWeight.w600)
+                                    .fontSize(16),
+                                Visibility(
+                                  visible: responsiveValue(context,
+                                      xs: false, sm: true),
+                                  child: const Gap(16),
+                                ),
                               ],
                             ),
                           ),
@@ -1393,16 +1517,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   thickness: 2,
                                 ),
                                 const Gap(32),
+                                if (investTab != 0) const Gap(10),
                                 const Text("Duração: Até 1 mês")
                                     .fontSize(16)
                                     .fontWeight(FontWeight.w500),
                                 const Gap(8),
-                                Text("Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                    .fontSize(14)
-                                    .fontWeight(FontWeight.bold),
+                                (investTab == 0)
+                                    ? Text(investTab == 2
+                                            ? "Aulas particulares"
+                                            : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
+                                        .fontSize(14)
+                                        .fontWeight(FontWeight.bold)
+                                    : const Gap(10),
                                 const Gap(32),
                                 Text(
-                                  "De R\$ ${investTab == 0 ? '1.499,99' : '2.999,98'}",
+                                  "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
                                   style: const TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: 3,
@@ -1414,10 +1543,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .textColor(Colors.black87),
                                 const Gap(4),
                                 const Gap(4),
-                                Text("Por R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
+                                Text("Por R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
                                     .fontSize(24)
                                     .fontWeight(FontWeight.bold),
-                                Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
+                                Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : investTab == 2 ? '1.031,96' : '515,98'}")
                                     .fontSize(20)
                                     .fontWeight(FontWeight.w400),
                                 const Gap(32),
@@ -1439,7 +1568,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {
                                           launchUrl(
                                             Uri.parse(
-                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20em%20${investTab == 0 ? 'grupo' : 'dupla'}%20que%20%C3%A9%20de%20segunda%20a%20sexta!"),
+                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%20de%20segunda%20a%20sexta!"),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           );
@@ -1491,16 +1620,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   thickness: 2,
                                 ),
                                 const Gap(32),
+                                if (investTab != 0) const Gap(10),
                                 const Text("Duração: Até 3 mês")
                                     .fontSize(16)
                                     .fontWeight(FontWeight.w500),
                                 const Gap(8),
-                                Text("Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                    .fontSize(14)
-                                    .fontWeight(FontWeight.bold),
+                                (investTab == 0)
+                                    ? Text(investTab == 2
+                                            ? "Aulas particulares"
+                                            : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
+                                        .fontSize(14)
+                                        .fontWeight(FontWeight.bold)
+                                    : const Gap(10),
                                 const Gap(32),
                                 Text(
-                                  "De R\$ ${investTab == 0 ? '1.499,99' : '2.999,98'}",
+                                  "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
                                   style: const TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: 3,
@@ -1511,11 +1645,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .fontWeight(FontWeight.bold)
                                     .textColor(Colors.black87),
                                 const Gap(4),
-                                Text("Por 3x de R\$ ${investTab == 0 ? '429,98' : '859,96'}")
+                                Text("Por 3x de R\$ ${investTab == 0 ? '429,98' : investTab == 2 ? '1.719,93' : '859,96'}")
                                     .fontSize(24)
                                     .fontWeight(FontWeight.bold),
                                 const Gap(4),
-                                Text("ou R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
+                                Text("ou R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
                                     .fontSize(20)
                                     .fontWeight(FontWeight.w400),
                                 const Gap(32),
@@ -1536,7 +1670,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {
                                           launchUrl(
                                             Uri.parse(
-                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20em%20${investTab == 0 ? 'grupo' : 'dupla'}%20que%20%C3%A9%202x%20na%20semana!"),
+                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%202x%20na%20semana!"),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           );
@@ -1588,16 +1722,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   thickness: 2,
                                 ),
                                 const Gap(32),
+                                if (investTab != 0) const Gap(10),
                                 const Text("Duração: Até 5 mês")
                                     .fontSize(16)
                                     .fontWeight(FontWeight.w500),
                                 const Gap(8),
-                                Text("Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                    .fontSize(14)
-                                    .fontWeight(FontWeight.bold),
+                                (investTab == 0)
+                                    ? Text(investTab == 2
+                                            ? "Aulas particulares"
+                                            : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
+                                        .fontSize(14)
+                                        .fontWeight(FontWeight.bold)
+                                    : const Gap(10),
                                 const Gap(32),
                                 Text(
-                                  "De R\$ ${investTab == 0 ? '1.499,99' : '2.999,98'}",
+                                  "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
                                   style: const TextStyle(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: 3,
@@ -1608,11 +1747,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .fontWeight(FontWeight.bold)
                                     .textColor(Colors.black87),
                                 const Gap(4),
-                                Text("Por 5x de R\$ ${investTab == 0 ? '257,99' : '515,98'}")
+                                Text("Por 5x de R\$ ${investTab == 0 ? '257,99' : investTab == 2 ? '1.031,96' : '515,98'}")
                                     .fontSize(24)
                                     .fontWeight(FontWeight.bold),
                                 const Gap(4),
-                                Text("ou R\$ ${investTab == 0 ? '1.289,95' : '2.579,90'}")
+                                Text("ou R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
                                     .fontSize(20)
                                     .fontWeight(FontWeight.w400),
                                 const Gap(32),
@@ -1633,7 +1772,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         onPressed: () {
                                           launchUrl(
                                             Uri.parse(
-                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20em%20${investTab == 0 ? 'grupo' : 'dupla'}%20que%20%C3%A9%201x%20na%20semana!"),
+                                                "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20as%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%201x%20na%20semana!"),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           );
@@ -1853,74 +1992,166 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Gap(64),
                       Expanded(
                         child: SizedBox(
-                          width: 800,
-                          child: ScrollConfiguration(
-                            behavior: CustomScrollBehavior(),
-                            child: PageView.builder(
-                              onPageChanged: (value) {
-                                setState(() {
-                                  indexFeedback = value;
-                                });
-                              },
-                              itemCount: feedbacks.length,
-                              itemBuilder: (context, index) {
-                                var feedback = feedbacks[index];
-                                return Card(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Row(
-                                      children: [
-                                        AspectRatio(
-                                          aspectRatio: responsiveValue(context,
-                                              xs: 9 / 16, md: 12 / 16, xl: 1),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image.asset(
-                                              feedback.photo,
-                                              fit: BoxFit.cover,
-                                              alignment: feedback.alignment,
-                                            ),
-                                          ),
-                                        ),
-                                        const Gap(16),
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            child: Column(
-                                              children: [
-                                                Text(feedback.name)
-                                                    .fontSize(20)
-                                                    .fontWeight(FontWeight.bold)
-                                                    .textColor(Colors.black),
-                                                const Gap(8),
-                                                Text(feedback.job)
-                                                    .fontSize(18)
-                                                    .fontWeight(FontWeight.w600)
-                                                    .textColor(
-                                                        AppColor.secondary),
-                                                const Gap(16),
-                                                Expanded(
-                                                  child: SingleChildScrollView(
-                                                    physics:
-                                                        const BouncingScrollPhysics(),
-                                                    child: Text(
-                                                      feedback.message,
-                                                    ).fontSize(16).fontWeight(
-                                                        FontWeight.w500),
+                          width: 900,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Visibility(
+                                visible: responsiveValue(context,
+                                    xs: false, xl: true),
+                                child: IconButton(
+                                  onPressed: () {
+                                    pageController.previousPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    LucideIcons.chevronLeft,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: ScrollConfiguration(
+                                  behavior: CustomScrollBehavior(),
+                                  child: PageView.builder(
+                                    controller: pageController,
+                                    onPageChanged: (value) {
+                                      setState(() {
+                                        indexFeedback = value;
+                                      });
+                                    },
+                                    itemCount: feedbacks.length,
+                                    itemBuilder: (context, index) {
+                                      var feedback = feedbacks[index];
+                                      return Card(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Row(
+                                            children: [
+                                              AspectRatio(
+                                                aspectRatio: responsiveValue(
+                                                    context,
+                                                    xs: 9 / 16,
+                                                    md: 12 / 16,
+                                                    xl: 1),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: Image.asset(
+                                                    feedback.photo,
+                                                    fit: BoxFit.cover,
+                                                    alignment:
+                                                        feedback.alignment,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              const Gap(16),
+                                              Expanded(
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  child: Column(
+                                                    children: [
+                                                      Text(feedback.name)
+                                                          .fontSize(20)
+                                                          .fontWeight(
+                                                              FontWeight.bold)
+                                                          .textColor(
+                                                              Colors.black),
+                                                      const Gap(8),
+                                                      Text(feedback.job)
+                                                          .fontSize(18)
+                                                          .fontWeight(
+                                                              FontWeight.w600)
+                                                          .textColor(AppColor
+                                                              .secondary),
+                                                      const Gap(16),
+                                                      Expanded(
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          physics:
+                                                              const BouncingScrollPhysics(),
+                                                          child: Text(
+                                                            feedback.message,
+                                                          )
+                                                              .fontSize(16)
+                                                              .fontWeight(
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   ),
+                                ),
+                              ),
+                              Visibility(
+                                visible: responsiveValue(context,
+                                    xs: false, xl: true),
+                                child: IconButton(
+                                  onPressed: () {
+                                    pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    LucideIcons.chevronRight,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Gap(16),
+                      Visibility(
+                        visible: responsiveValue(context, xs: true, xl: false),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                pageController.previousPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
                                 );
                               },
+                              icon: const Icon(
+                                LucideIcons.chevronLeft,
+                                color: Colors.white,
+                                size: 50,
+                              ),
                             ),
-                          ),
+                            const Gap(32),
+                            IconButton(
+                              onPressed: () {
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              icon: const Icon(
+                                LucideIcons.chevronRight,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const Gap(16),
@@ -1998,8 +2229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Gap(30),
-                                          const Text("Lojinha da Dibs")
-                                              .fontSize(24),
+                                          const Text("Loja Dibs").fontSize(24),
                                           MouseRegion(
                                             cursor: SystemMouseCursors.click,
                                             child: GestureDetector(

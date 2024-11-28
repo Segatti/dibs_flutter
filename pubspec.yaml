@@ -47,6 +47,7 @@ dependencies:
   responsive_grid: ^2.4.4
   font_awesome_flutter: ^10.8.0
   smooth_page_indicator: ^1.2.0+3
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
