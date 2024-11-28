@@ -560,7 +560,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                       const CheckItemText(
                                         title: "Certificado*",
                                       ),
-                                      const Gap(64),
+                                      Gap(
+                                        responsiveValue(context,
+                                            xs: 32, md: 64),
+                                      ),
                                       Row(
                                         children: [
                                           Flexible(
@@ -604,7 +607,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                           fontSize: 14,
                                         ),
                                       ),
-                                      const Gap(64),
+                                      Gap(
+                                        responsiveValue(context,
+                                            xs: 16, md: 64),
+                                      ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -644,7 +650,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ],
                                       ),
-                                      const Gap(32),
+                                      Gap(
+                                        responsiveValue(context,
+                                            xs: 16, md: 32),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -2322,7 +2331,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             Gap(16),
                             Text(
-                              "Lojinha da Dibs",
+                              "Loja Dibs",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
