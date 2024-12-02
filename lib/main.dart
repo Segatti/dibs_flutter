@@ -1158,11 +1158,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Padding(
                         padding: EdgeInsets.only(
                           bottom: MediaQuery.sizeOf(context).width * .05,
+                          right: MediaQuery.sizeOf(context).width * .05,
                           left: MediaQuery.sizeOf(context).width * .05,
                         ),
                         child: Image.asset(
                           "assets/images/viagem.png",
-                          width: MediaQuery.sizeOf(context).width * .38,
+                          width: MediaQuery.sizeOf(context).width *
+                              responsiveValue(context, xs: 1, sm: .8, md: .38),
                           fit: BoxFit.cover,
                         ),
                       ),
