@@ -7,10 +7,8 @@ import 'package:dibs_flutter/models/feedback_model.dart';
 import 'package:dibs_flutter/widgets/check_item_text.dart';
 import 'package:dibs_flutter/widgets/custom_scroll_behavior.dart';
 import 'package:dibs_flutter/widgets/menu_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -78,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
     "        Ao final deste nível, você estará pronto para se comunicar de forma simples e prática em inglês! Imagine poder falar sobre sua família, compartilhar informações sobre seu trabalho, descrever suas experiências passadas e até conversar sobre suas preferências, como filmes, músicas ou hobbies. Você aprenderá frases úteis para situações do dia a dia, como apresentar-se, fazer perguntas e responder com confiança. \n\n        Venha dar o primeiro passo no aprendizado do inglês e descubra como é empolgante começar a se expressar no idioma!",
     "        Ao final deste nível, você terá a confiança necessária para dar suas opiniões sobre temas que domina, compartilhar experiências do passado e falar sobre seus desejos e objetivos. Estará preparado para viajar com fluência, sabendo pedir ajuda, dar e entender direções, além de conversar tranquilamente com falantes de inglês sem grandes preocupações. Imagine discutir filmes que assistiu, descrever viagens incríveis ou planejar suas próximas aventuras internacionais, tudo isso em inglês! \n\n        Este é o passo que conecta você ao mundo. Venha avançar e expandir seus horizontes!",
     "        Ao concluir este nível, você estará pronto para dominar conversas com nuances e falas implícitas, expressando suas opiniões com clareza e confiança em contextos acadêmicos e profissionais. Imagine participar de reuniões, debates ou apresentações, transmitindo suas ideias de forma segura e impactante. Este é o momento em que seu inglês alcança um novo patamar, permitindo que você se destaque em ambientes exigentes e esteja preparado para desafios globais. \n\n        Venha superar barreiras e mostrar todo o seu potencial!",
-    "        Ao finalizar este nível, você terá completado todo o curso e se tornado um verdadeiro especialista na Língua Inglesa! Como um falante avançado, estará confiante em suas habilidades linguísticas e preparado para se comunicar com facilidade em qualquer situação, seja em contextos profissionais, acadêmicos ou sociais. Imagine participar de reuniões importantes, discutir temas complexos ou viajar pelo mundo com fluência e naturalidade. Este é o momento de celebrar sua conquista e abrir portas para novas oportunidades. \n\n        Você está prestes a dominar o inglês de forma definitiva!",
+    "        Ao finalizar este nível, você terá completado todo o curso e se tornado um verdadeiro especialista na Língua Inglesa! Como um falante avançado, estará confiante em suas habilidades linguísticas e preparado para se comunicar com facilidade em qualquer situação, seja em contextos profissionais, acadêmicos ou sociais. Imagine participar de reuniões importantes, discutir temas complexos ou viajar pelo mundo com fluência e naturalidade. Este é o momento de celebrar sua conquista e abrir portas para novas oportunidades. \n        Você está prestes a dominar o inglês de forma definitiva!",
+    "        Aprenda tudo o que você precisa para se comunicar com fluência em inglês durante suas aventuras. Este curso é totalmente focado em situações reais enfrentadas por viajantes, como no aeroporto, avião, imigração, hotel e muito mais!  \n        Domine o inglês de viagem e aproveite cada momento sem barreiras! 🌍✈️",
   ];
 
   var feedbacks = [
@@ -529,7 +528,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         const Gap(32),
                                         const CheckItemText(
-                                            title: "Aulas ao vivo"),
+                                            title:
+                                                "Aulas ao vivo (não são gravadas)"),
                                         const Gap(16),
                                         const CheckItemText(
                                           title: "Professores qualificados",
@@ -887,7 +887,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             const Gap(64),
                             styled.StyledText(
-                              text: "Curso de <bold>Inglês Geral</bold>",
+                              text:
+                                  "Cada nivel possui <bold>20 aulas</bold> focadas em conversação",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.montserrat(
                                 color: const Color(0xFF082a72),
@@ -904,25 +905,25 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               },
                             ),
-                            const Gap(16),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColor.primary,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              child: Text(
-                                "20 aulas em cada nível",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
+                            // const Gap(16),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     color: AppColor.primary,
+                            //     borderRadius: BorderRadius.circular(50),
+                            //   ),
+                            //   padding: const EdgeInsets.symmetric(
+                            //     horizontal: 16,
+                            //     vertical: 8,
+                            //   ),
+                            //   child: Text(
+                            //     "20 aulas em cada nível",
+                            //     style: GoogleFonts.montserrat(
+                            //       fontSize: 18,
+                            //       color: Colors.white,
+                            //       fontWeight: FontWeight.w500,
+                            //     ),
+                            //   ),
+                            // ),
                             const Gap(24),
                             Text(
                               "CASO VOCÊ NÃO TENHA CERTEZA QUAL SEU NÍVEL, OFERECEMOS GRATUITAMENTE UM TESTE DE NIVELAMENTO EM CONVERSAÇÂO EM INGLÊS. ",
@@ -1121,6 +1122,48 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                         ),
+                                        Expanded(
+                                          child: MouseRegion(
+                                            cursor: SystemMouseCursors.click,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  cursoIndex = 4;
+                                                });
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius
+                                                          .vertical(
+                                                    top: Radius.circular(10),
+                                                  ),
+                                                  color: (cursoIndex == 4)
+                                                      ? AppColor.primary
+                                                      : AppColor
+                                                          .backgroundColor,
+                                                ),
+                                                height: 100,
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Ingles para viagem",
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                      color: (cursoIndex == 4)
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     Expanded(
@@ -1160,161 +1203,115 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               RepaintBoundary(
                 child: Container(
-                  // key: equipeKey,
-                  height: max(responsiveValue(context, xs: 900, md: 825),
-                      min(1000 - 110, size.height - 110)),
                   width: double.infinity,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: AppColor.primary.withValues(alpha: .9),
                   ),
-                  child: Stack(
+                  child: Column(
                     children: [
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.sizeOf(context).width * .05,
-                            right: MediaQuery.sizeOf(context).width * .05,
-                            left: MediaQuery.sizeOf(context).width * .05,
-                          ),
-                          child: Image.asset(
-                            "assets/images/viagem.png",
-                            width: MediaQuery.sizeOf(context).width *
-                                responsiveValue(context,
-                                    xs: 1, sm: .8, md: .38),
-                            fit: BoxFit.cover,
-                          ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: responsiveValue(context, xs: 8, sm: 16),
                         ),
-                      ),
-                      Visibility(
-                        visible: responsiveValue(context, xs: false, md: true),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Image.asset(
-                            "assets/images/aviao1.png",
-                            width: 300,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: responsiveValue(context, xs: false, md: true),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Image.asset(
-                            "assets/images/aviao2.png",
-                            width: 300,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: responsiveValue(context, xs: 8, sm: 16),
-                          ),
-                          width: size.width *
-                              responsiveValue(context, xs: 1, sm: .8),
-                          constraints: const BoxConstraints(maxWidth: 1024),
-                          height: max(
-                              responsiveValue(context, xs: 900, md: 825),
-                              min(1000 - 110, size.height - 110)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Gap(64),
-                              styled.StyledText(
-                                text: "<bold>Inglês para Viagem</bold>",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    const Shadow(
-                                      color: Colors.black54,
-                                      offset: Offset.zero,
-                                      blurRadius: 4,
-                                    ),
-                                  ],
-                                ),
-                                tags: {
-                                  "bold": styled.StyledTextTag(
-                                    style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
-                                      color: colorScheme.secondary,
-                                    ),
-                                  ),
-                                },
+                        width: size.width *
+                            responsiveValue(context, xs: 1, sm: .8),
+                        constraints: const BoxConstraints(maxWidth: 1024),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Gap(64),
+                            styled.StyledText(
+                              text:
+                                  "O que você vai levar na bagagem do conhecimento?",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                height: 1,
                               ),
-                              const Gap(16),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                child: Text(
-                                  "20 aulas de 1 hora cada",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: 18,
-                                    color: AppColor.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              const Gap(64),
-                              Row(
-                                children: [
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, xl: true),
-                                    child: const Spacer(flex: 2),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withValues(
-                                          alpha: responsiveValue(context,
-                                              xs: .5, xl: .1),
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
+                            ),
+                            const Gap(64),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withValues(
+                                        alpha: responsiveValue(context,
+                                            xs: .5, xl: .1),
                                       ),
-                                      padding: const EdgeInsets.all(16),
-                                      child: styled.StyledText(
-                                        text:
-                                            "<bold>Prepare-se para a sua próxima viagem com confiança!</bold>  \n\nAprenda tudo o que você precisa para se comunicar com fluência em inglês durante suas aventuras. Este curso é totalmente focado em situações reais enfrentadas por viajantes, como no aeroporto, avião, imigração, hotel e muito mais!  \n\n<bold>O que você vai levar na bagagem do conhecimento?</bold>\n\n- Planner de viagem: organize cada detalhe da sua jornada.\n- Material de aula exclusivo: para estudar em qualquer lugar.\n- Checklist de viagem: para não esquecer nada essencial.\n- Planner de orçamento: planeje seus gastos com facilidade.\n\nDomine o inglês de viagem e aproveite cada momento sem barreiras! 🌍✈️",
-                                        textAlign: TextAlign.justify,
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white,
-                                          fontSize: responsiveValue(context,
-                                              xs: 14, sm: 16, md: 18),
-                                        ),
-                                        tags: {
-                                          "bold": styled.StyledTextTag(
-                                            style: GoogleFonts.montserrat(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: responsiveValue(context,
-                                                  xs: 16, sm: 18, md: 20),
-                                              color: colorScheme.secondary,
-                                            ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: const EdgeInsets.all(16),
+                                    child: Column(
+                                      children: [
+                                        styled.StyledText(
+                                          text:
+                                              "\n<bold>Além das aulas ao vivo, você recebe:</bold>",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                            color: Colors.white,
+                                            fontSize: responsiveValue(context,
+                                                xs: 14, sm: 16, md: 18),
                                           ),
-                                        },
-                                      ),
+                                          tags: {
+                                            "bold": styled.StyledTextTag(
+                                              style: GoogleFonts.montserrat(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: responsiveValue(
+                                                    context,
+                                                    xs: 16,
+                                                    sm: 18,
+                                                    md: 20),
+                                                color: colorScheme.secondary,
+                                              ),
+                                            ),
+                                            "icon": styled.StyledTextIconTag(
+                                              LucideIcons.check,
+                                            ),
+                                          },
+                                        ),
+                                        const Gap(32),
+                                        styled.StyledText(
+                                          text:
+                                              "<icon/> Material de apoio.\n<icon/> Atividades extras para cada aula.\n<icon/> Planner de estudo exclusivo com atividades prontas para você praticar seu inglês todo dia.\n<icon/> Bônus especiais na sua sala de aula virtual.\n",
+                                          textAlign: TextAlign.justify,
+                                          style: GoogleFonts.montserrat(
+                                            color: Colors.white,
+                                            fontSize: responsiveValue(context,
+                                                xs: 14, sm: 16, md: 18),
+                                          ),
+                                          tags: {
+                                            "bold": styled.StyledTextTag(
+                                              style: GoogleFonts.montserrat(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: responsiveValue(
+                                                    context,
+                                                    xs: 16,
+                                                    sm: 18,
+                                                    md: 20),
+                                                color: colorScheme.secondary,
+                                              ),
+                                            ),
+                                            "icon": styled.StyledTextIconTag(
+                                              LucideIcons.check,
+                                              color: colorScheme.secondary,
+                                              size: 30,
+                                            ),
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Gap(64),
+                          ],
                         ),
                       ),
                     ],
@@ -1342,7 +1339,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         const Gap(64),
                         styled.StyledText(
-                          text: "Investimento por nível",
+                          text:
+                              "Aqui, você escolhe o formato que melhor encaixa na sua rotina! ⏳✨",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.montserrat(
                             color: AppColor.primary,
@@ -1355,148 +1353,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 26,
                                 color: colorScheme.secondary,
-                              ),
-                            ),
-                          },
-                        ),
-                        const Gap(32),
-                        CupertinoSlidingSegmentedControl<int>(
-                          backgroundColor: AppColor.primary,
-                          padding: const EdgeInsets.all(4),
-                          groupValue: investTab,
-                          onValueChanged: (int? value) {
-                            if (value != null) {
-                              setState(() {
-                                investTab = value;
-                              });
-                            }
-                          },
-                          children: <int, Widget>{
-                            0: Container(
-                              height: 48,
-                              width: 200,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: SvgPicture.asset(
-                                      "assets/icons/community.svg",
-                                      width: 30,
-                                      height: 30,
-                                      colorFilter: ColorFilter.mode(
-                                        (investTab == 0)
-                                            ? Colors.black
-                                            : Colors.white,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(8),
-                                  ),
-                                  Text(responsiveValue(context,
-                                          xs: 'Grupo', md: 'Aulas em Grupo'))
-                                      .textColor(
-                                        investTab == 0
-                                            ? Colors.black
-                                            : Colors.white,
-                                      )
-                                      .fontWeight(FontWeight.w600)
-                                      .fontSize(16),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            1: Container(
-                              height: 36,
-                              width: 200,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: Icon(
-                                      LucideIcons.users2,
-                                      color: investTab == 1
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(8),
-                                  ),
-                                  Text(responsiveValue(context,
-                                          xs: 'Dupla', md: 'Aulas em Dupla'))
-                                      .textColor(
-                                        investTab == 1
-                                            ? Colors.black
-                                            : Colors.white,
-                                      )
-                                      .fontWeight(FontWeight.w600)
-                                      .fontSize(16),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            2: Container(
-                              height: 36,
-                              width: 200,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: Icon(
-                                      LucideIcons.user2,
-                                      color: investTab == 2
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(8),
-                                  ),
-                                  Text(
-                                    responsiveValue(
-                                      context,
-                                      xs: 'Individual',
-                                      md: 'Aulas Individuais',
-                                    ),
-                                  )
-                                      .textColor(
-                                        investTab == 2
-                                            ? Colors.black
-                                            : Colors.white,
-                                      )
-                                      .fontWeight(FontWeight.w600)
-                                      .fontSize(16),
-                                  Visibility(
-                                    visible: responsiveValue(context,
-                                        xs: false, sm: true),
-                                    child: const Gap(16),
-                                  ),
-                                ],
                               ),
                             ),
                           },
@@ -1538,7 +1394,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: Colors.grey,
+                                  color: Colors.amber,
                                   width: 2,
                                 ),
                                 color: Colors.white,
@@ -1553,50 +1409,51 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Column(
                                 children: [
                                   const Gap(16),
-                                  const Text(
-                                    "Aulas de Segunda a Sexta",
-                                    style: TextStyle(height: 1),
-                                  ).fontSize(20).fontWeight(FontWeight.w600),
+                                  styled.StyledText(
+                                    text: "Plano Ouro <color>🟡</color>",
+                                    style: const TextStyle(
+                                      height: 1,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    tags: {
+                                      "color": styled.StyledTextTag(
+                                        style: const TextStyle(
+                                          color: Colors.amber,
+                                        ),
+                                      ),
+                                    },
+                                  ),
                                   const Gap(16),
                                   const Divider(
                                     height: 2,
-                                    color: Colors.black38,
+                                    color: Colors.amber,
                                     thickness: 2,
                                   ),
-                                  const Gap(32),
-                                  if (investTab != 0) const Gap(10),
-                                  const Text("Duração: Até 1 mês")
+                                  const Gap(16),
+                                  const Text("Aulas 1x na semana")
                                       .fontSize(16)
-                                      .fontWeight(FontWeight.w500),
-                                  const Gap(8),
-                                  (investTab == 0)
-                                      ? Text(investTab == 2
-                                              ? "Aulas particulares"
-                                              : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                          .fontSize(14)
-                                          .fontWeight(FontWeight.bold)
-                                      : const Gap(10),
-                                  const Gap(32),
-                                  Text(
-                                    "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationThickness: 3,
-                                      decorationColor: Colors.red,
+                                      .fontWeight(FontWeight.w500)
+                                      .bold(),
+                                  const Gap(16),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: styled.StyledText(
+                                      text:
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 450,00/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 900,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 1.800,00/mês</bold>",
+                                      tags: {
+                                        "bold": styled.StyledTextTag(
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            // fontSize: 26,
+                                            // color: colorScheme.secondary,
+                                          ),
+                                        ),
+                                      },
                                     ),
-                                  )
-                                      .fontSize(18)
-                                      .fontWeight(FontWeight.bold)
-                                      .textColor(Colors.black87),
-                                  const Gap(4),
-                                  const Gap(4),
-                                  Text("Por R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
-                                      .fontSize(24)
-                                      .fontWeight(FontWeight.bold),
-                                  Text("ou 5x de R\$ ${investTab == 0 ? '257,99' : investTab == 2 ? '1.031,96' : '515,98'}")
-                                      .fontSize(20)
-                                      .fontWeight(FontWeight.w400),
-                                  const Gap(32),
+                                  ),
+                                  const Gap(16),
                                   Row(
                                     children: [
                                       const Gap(16),
@@ -1616,7 +1473,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           onPressed: () {
                                             launchUrl(
                                               Uri.parse(
-                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%20de%20segunda%20a%20sexta!"),
+                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20plano%20ouro!"),
                                               mode: LaunchMode
                                                   .externalApplication,
                                             );
@@ -1643,7 +1500,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: Colors.grey,
+                                  color: Colors.red,
                                   width: 2,
                                 ),
                                 color: Colors.white,
@@ -1658,50 +1515,65 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Column(
                                 children: [
                                   const Gap(16),
-                                  const Text(
-                                    "Aulas 2x na semana",
-                                    style: TextStyle(height: 1),
-                                  ).fontSize(20).fontWeight(FontWeight.w600),
+                                  styled.StyledText(
+                                    text: "Plano Rubi <color>♦️</color>",
+                                    style: const TextStyle(
+                                      height: 1,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    tags: {
+                                      "color": styled.StyledTextTag(
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    },
+                                  ),
                                   const Gap(16),
                                   const Divider(
                                     height: 2,
-                                    color: Colors.black38,
+                                    color: Colors.red,
                                     thickness: 2,
                                   ),
-                                  const Gap(32),
-                                  if (investTab != 0) const Gap(10),
-                                  const Text("Duração: Até 3 mês")
+                                  const Gap(16),
+                                  const Text("Aulas 2x na semana")
                                       .fontSize(16)
-                                      .fontWeight(FontWeight.w500),
-                                  const Gap(8),
-                                  (investTab == 0)
-                                      ? Text(investTab == 2
-                                              ? "Aulas particulares"
-                                              : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                          .fontSize(14)
-                                          .fontWeight(FontWeight.bold)
-                                      : const Gap(10),
-                                  const Gap(32),
-                                  Text(
-                                    "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationThickness: 3,
-                                      decorationColor: Colors.red,
+                                      .fontWeight(FontWeight.w500)
+                                      .bold(),
+                                  const Gap(16),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: styled.StyledText(
+                                      text:
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 897,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 1.794,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 3.588,00/mês</bold>",
+                                      tags: {
+                                        "bold": styled.StyledTextTag(
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            // fontSize: 26,
+                                            // color: colorScheme.secondary,
+                                          ),
+                                        ),
+                                      },
                                     ),
-                                  )
-                                      .fontSize(18)
-                                      .fontWeight(FontWeight.bold)
-                                      .textColor(Colors.black87),
-                                  const Gap(4),
-                                  Text("Por 3x de R\$ ${investTab == 0 ? '429,98' : investTab == 2 ? '1.719,93' : '859,96'}")
-                                      .fontSize(24)
-                                      .fontWeight(FontWeight.bold),
-                                  const Gap(4),
-                                  Text("ou R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
-                                      .fontSize(20)
-                                      .fontWeight(FontWeight.w400),
-                                  const Gap(32),
+                                  ),
+                                  const Gap(16),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.orange,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 4,
+                                    ),
+                                    child: const Text("Plano mais vendido")
+                                        .bold()
+                                        .textColor(Colors.white),
+                                  ),
+                                  const Gap(16),
                                   Row(
                                     children: [
                                       const Gap(16),
@@ -1720,7 +1592,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           onPressed: () {
                                             launchUrl(
                                               Uri.parse(
-                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%202x%20na%20semana!"),
+                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20plano%rubi!"),
                                               mode: LaunchMode
                                                   .externalApplication,
                                             );
@@ -1747,7 +1619,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: Colors.grey,
+                                  color: Colors.blue,
                                   width: 2,
                                 ),
                                 color: Colors.white,
@@ -1762,50 +1634,44 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Column(
                                 children: [
                                   const Gap(16),
-                                  const Text(
-                                    "Aulas 1x na semana",
-                                    style: TextStyle(height: 1),
-                                  ).fontSize(20).fontWeight(FontWeight.w600),
+                                  styled.StyledText(
+                                    text: "Plano Diamante <color>💎</color>",
+                                    style: const TextStyle(
+                                      height: 1,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   const Gap(16),
                                   const Divider(
                                     height: 2,
-                                    color: Colors.black38,
+                                    color: Colors.blue,
                                     thickness: 2,
                                   ),
-                                  const Gap(32),
-                                  if (investTab != 0) const Gap(10),
-                                  const Text("Duração: Até 5 mês")
+                                  const Gap(16),
+                                  const Text("Aulas 5x na semana")
                                       .fontSize(16)
-                                      .fontWeight(FontWeight.w500),
-                                  const Gap(8),
-                                  (investTab == 0)
-                                      ? Text(investTab == 2
-                                              ? "Aulas particulares"
-                                              : "Salas com até ${investTab == 0 ? '4' : '2'} alunos")
-                                          .fontSize(14)
-                                          .fontWeight(FontWeight.bold)
-                                      : const Gap(10),
-                                  const Gap(32),
-                                  Text(
-                                    "De R\$ ${investTab == 0 ? '1.499,99' : investTab == 2 ? '5.499,99' : '2.999,98'}",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationThickness: 3,
-                                      decorationColor: Colors.red,
+                                      .fontWeight(FontWeight.w500)
+                                      .bold(),
+                                  const Gap(16),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: styled.StyledText(
+                                      text:
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 1.800,00/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 3.600,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 7.200,00/mês</bold>",
+                                      tags: {
+                                        "bold": styled.StyledTextTag(
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            // fontSize: 26,
+                                            // color: colorScheme.secondary,
+                                          ),
+                                        ),
+                                      },
                                     ),
-                                  )
-                                      .fontSize(18)
-                                      .fontWeight(FontWeight.bold)
-                                      .textColor(Colors.black87),
-                                  const Gap(4),
-                                  Text("Por 5x de R\$ ${investTab == 0 ? '257,99' : investTab == 2 ? '1.031,96' : '515,98'}")
-                                      .fontSize(24)
-                                      .fontWeight(FontWeight.bold),
-                                  const Gap(4),
-                                  Text("ou R\$ ${investTab == 0 ? '1.289,95' : investTab == 2 ? '5.159,80' : '2.579,90'}")
-                                      .fontSize(20)
-                                      .fontWeight(FontWeight.w400),
-                                  const Gap(32),
+                                  ),
+                                  const Gap(16),
                                   Row(
                                     children: [
                                       const Gap(16),
@@ -1824,7 +1690,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           onPressed: () {
                                             launchUrl(
                                               Uri.parse(
-                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20curso%20de%20ingl%C3%AAs%20${investTab == 2 ? 'individual' : investTab == 0 ? 'em%20grupo' : 'em%20dupla'}%20que%20%C3%A9%201x%20na%20semana!"),
+                                                  "https://wa.me/5594984068284?text=Ol%C3%A1%2C%20Eu%20gostaria%20de%20contratar%20o%20plano%diamante!"),
                                               mode: LaunchMode
                                                   .externalApplication,
                                             );
@@ -1843,11 +1709,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ],
                         ),
-                        const Gap(32),
+                        const Gap(64),
                         const Text(
-                          "Cartão de crédito (cobrança recorrente), boleto ou pix (5% de desconto até o vencimento).",
+                          "Cartão de crédito (cobrança recorrente), boleto ou pix.",
                           textAlign: TextAlign.center,
-                        ).fontWeight(FontWeight.w600),
+                        ).fontWeight(FontWeight.w600).fontSize(18),
                         const Gap(32),
                         const Gap(64),
                       ],
