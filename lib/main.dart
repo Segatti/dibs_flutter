@@ -888,7 +888,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             const Gap(64),
                             styled.StyledText(
                               text:
-                                  "Cada nivel possui <bold>20 aulas</bold> focadas em conversação",
+                                  "Cada nível possui <bold>20 aulas</bold> focadas em conversação",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.montserrat(
                                 color: const Color(0xFF082a72),
@@ -1224,7 +1224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             const Gap(64),
                             styled.StyledText(
                               text:
-                                  "O que você vai levar na bagagem do conhecimento?",
+                                  "Oferecemos turmas reduzidas para garantir mais atenção e prática! ⏳✨",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.montserrat(
                                 color: Colors.white,
@@ -1251,7 +1251,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       children: [
                                         styled.StyledText(
                                           text:
-                                              "\n<bold>Além das aulas ao vivo, você recebe:</bold>",
+                                              "\n<bold>Aqui você só paga a mensalidade sem taxa escondida. Sem enrolação. Simples assim. ⏳✨ E recebe tudo isso incluso, online:</bold>",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.montserrat(
                                             color: Colors.white,
@@ -1278,7 +1278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         const Gap(32),
                                         styled.StyledText(
                                           text:
-                                              "<icon/> Material de apoio.\n<icon/> Atividades extras para cada aula.\n<icon/> Planner de estudo exclusivo com atividades prontas para você praticar seu inglês todo dia.\n<icon/> Bônus especiais na sua sala de aula virtual.\n",
+                                              "<icon/> Aulas ao vivo dinâmicas e interativas.\n<icon/> Material completo.\n<icon/> Atividades extras + planner de estudos diário.\n<icon/> Correção personalizada e acompanhamento de perto.\n<icon/> Bônus exclusivos na sua sala de aula virtual.\n",
                                           textAlign: TextAlign.justify,
                                           style: GoogleFonts.montserrat(
                                             color: Colors.white,
@@ -1441,7 +1441,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         horizontal: 16),
                                     child: styled.StyledText(
                                       text:
-                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 450,00/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 900,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 1.800,00/mês</bold>",
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 447,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 897,99/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 1.797,99/mês</bold>",
                                       tags: {
                                         "bold": styled.StyledTextTag(
                                           style: GoogleFonts.montserrat(
@@ -1547,7 +1547,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         horizontal: 16),
                                     child: styled.StyledText(
                                       text:
-                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 897,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 1.794,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 3.588,00/mês</bold>",
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 897,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 1.797,99/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 3.595,98/mês</bold>",
                                       tags: {
                                         "bold": styled.StyledTextTag(
                                           style: GoogleFonts.montserrat(
