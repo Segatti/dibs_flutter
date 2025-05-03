@@ -549,56 +549,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                           responsiveValue(context,
                                               xs: 32, md: 64),
                                         ),
-                                        Row(
-                                          children: [
-                                            Flexible(
-                                              fit: FlexFit.tight,
-                                              child:
-                                                  ChicletOutlinedAnimatedButton(
-                                                backgroundColor:
-                                                    const Color(0xFF25d366),
-                                                borderColor:
-                                                    const Color(0xFF25d366)
-                                                        .lighten(50),
-                                                buttonColor:
-                                                    const Color(0xFF25d366)
-                                                        .darken(20),
-                                                buttonHeight: 10,
-                                                width: 400,
-                                                height: 60,
-                                                onPressed: () {
-                                                  launchUrl(
-                                                    Uri.parse(
-                                                        "https://wa.me/5594984068284?text=Hey"),
-                                                    mode: LaunchMode
-                                                        .externalApplication,
-                                                  );
-                                                },
-                                                child: const Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    FaIcon(
-                                                      FontAwesomeIcons.whatsapp,
-                                                      color: Colors.white,
-                                                      size: 40,
-                                                    ),
-                                                    Gap(8),
-                                                    Text(
-                                                      "Entrar em contato",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 24,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
                                         const Gap(16),
                                         const Text(
                                           "* O Certificado é emitido ao finalizar o nivel de inglês avançado.",
@@ -1938,6 +1888,40 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         const Gap(32),
+                        ChicletOutlinedAnimatedButton(
+                          backgroundColor: const Color(0xFF25d366),
+                          borderColor: const Color(0xFF25d366).lighten(50),
+                          buttonColor: const Color(0xFF25d366).darken(20),
+                          buttonHeight: 10,
+                          width: 400,
+                          height: 60,
+                          onPressed: () {
+                            launchUrl(
+                              Uri.parse("https://wa.me/5594984068284?text=Hey"),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.whatsapp,
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                              Gap(8),
+                              Text(
+                                "Entrar em contato",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Gap(16),
                         ChicletOutlinedAnimatedButton(
                           backgroundColor: const Color(0xFF24cf5f),
                           borderColor: const Color(0xFF24cf5f).darken(2),
