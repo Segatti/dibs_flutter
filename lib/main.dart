@@ -1391,7 +1391,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         horizontal: 16),
                                     child: styled.StyledText(
                                       text:
-                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 447,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 897,99/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 1.797,99/mês</bold>",
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 447,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 895,98/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 1.791,96/mês</bold>",
                                       tags: {
                                         "bold": styled.StyledTextTag(
                                           style: GoogleFonts.montserrat(
@@ -1497,7 +1497,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         horizontal: 16),
                                     child: styled.StyledText(
                                       text:
-                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 897,99/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 1.797,99/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 3.595,98/mês</bold>",
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 746,65/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 1.493,30/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 2.986,60/mês</bold>",
                                       tags: {
                                         "bold": styled.StyledTextTag(
                                           style: GoogleFonts.montserrat(
@@ -1609,7 +1609,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         horizontal: 16),
                                     child: styled.StyledText(
                                       text:
-                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 1.800,00/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 3.600,00/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 7.200,00/mês</bold>",
+                                          "👥 <bold>Grupo (até 4 pessoas)</bold> – Mais interação e exposição a diferentes sotaques → <bold>R\$ 2.239,95/mês</bold>\n\n👫 <bold>Dupla</bold> – Ritmo intenso com troca de experiências → <bold>R\$ 4.479,90/mês</bold>\n\n👩🏽‍💻 <bold>Individual</bold> – Atendimento 100% exclusivo e individualizado para você → <bold>R\$ 8.959,80/mês</bold>",
                                       tags: {
                                         "bold": styled.StyledTextTag(
                                           style: GoogleFonts.montserrat(
