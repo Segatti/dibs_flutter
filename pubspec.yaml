@@ -37,17 +37,17 @@ dependencies:
   cupertino_icons: ^1.0.8
   url_strategy: ^0.3.0
   google_fonts: ^6.2.1
-  js: ^0.7.1
   lucide_icons: ^0.257.0
   gap: ^3.0.1
-  chiclet: ^1.2.0
-  awesome_extensions: ^2.0.20
   url_launcher: ^6.3.1
   styled_text: ^8.1.0
   responsive_grid: ^2.4.4
   font_awesome_flutter: ^10.8.0
   smooth_page_indicator: ^1.2.0
   flutter_svg: ^2.0.17
+  lottie: ^3.3.1
+  confetti: ^0.8.0
+  flutter_confetti: ^0.5.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +75,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lotties/
     # - assets/google_fonts/
   #   - images/a_dot_ham.jpeg
 
