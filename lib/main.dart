@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:styled_text/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'models/lotties_asset.dart';
@@ -259,37 +260,87 @@ class _TelaNomeState extends State<_TelaNome> {
     super.initState();
     _controller = TextEditingController(text: widget.cadastro.nome);
     _isFilled = widget.cadastro.nome.isNotEmpty;
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   if (ResponsiveUtils.isMobile(context)) {
-    //     showDialog(
-    //       context: context,
-    //       builder: (_) {
-    //         return Dialog.fullscreen(
-    //           child: SingleChildScrollView(
-    //             physics: const BouncingScrollPhysics(),
-    //             child: Column(
-    //               children: [
-    //                 Row(
-    //                   mainAxisAlignment: MainAxisAlignment.end,
-    //                   children: [
-    //                     IconButton(
-    //                       onPressed: () {
-    //                         Navigator.pop(context);
-    //                       },
-    //                       icon: const Icon(LucideIcons.x),
-    //                     )
-    //                   ],
-    //                 ),
-    //                 const Text('Aviso'),
-    //                 const Text('Por favor, preencha o campo de nome.'),
-    //               ],
-    //             ),
-    //           ),
-    //         );
-    //       },
-    //     );
-    //   }
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ResponsiveUtils.isMobile(context)) {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Dialog.fullscreen(
+              backgroundColor: AppColor.primary,
+              child: Center(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 32),
+                        SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: SvgPicture.asset(
+                            "assets/icons/dibs.svg",
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Text(
+                          'Dibs Online English School',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Inglês ao vivo para quem quer falar de verdade',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 36),
+                        _DialogButton('Aula de inglês ao vivo', () {
+                          Navigator.pop(context);
+                        }),
+                        const SizedBox(height: 16),
+                        _DialogButton('Curso de inglês para viagem', () {
+                          Navigator.pop(context);
+                        }),
+                        const SizedBox(height: 16),
+                        _DialogButton('Planner de inglês online', () {
+                          launchUrlString(
+                            "https://hotm.art/plannerdeingles",
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }),
+                        const SizedBox(height: 16),
+                        _DialogButton('Spotify Dibs', () {
+                          launchUrlString(
+                            "https://open.spotify.com/playlist/591Anp20c5C2So0EY6dIJn?si=1Ig5xaiNRlCqy2bczKAZHg",
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }),
+                        const SizedBox(height: 32),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -3915,5 +3966,31 @@ Dias disponíveis: ${dias.join(", ")}
 Período: $periodo
 Localização: $localizacao
 ''';
+  }
+}
+
+// Adicionar widget auxiliar para os botões do dialog
+class _DialogButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  const _DialogButton(this.text, this.onPressed);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 48,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: Colors.white, width: 1.5),
+          foregroundColor: Colors.white,
+          textStyle:
+              GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w500),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        onPressed: onPressed,
+        child: Text(text, textAlign: TextAlign.center),
+      ),
+    );
   }
 }
