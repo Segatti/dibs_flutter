@@ -3954,7 +3954,25 @@ class CadastroDibs {
   CadastroDibs();
 
   String toWhatsappMessage() {
-    return 'Ol%C3%A1%2C%20meu%20nome%20%C3%A9%20$nome!%20Acabei%20de%20preencher%20o%20formul%C3%A1rio%20da%20Dibs%20e%20gostaria%20de%20seguir%20com%20o%20atendimento%20%F0%9F%A4%8D%20%0A%0AAqui%20est%C3%A3o%20minhas%20escolhas%3A%0A%0A%F0%9F%93%8D%20Minha%20motiva%C3%A7%C3%A3o%3A%20$motivacao%0A%F0%9F%93%98%20Minha%20experiencia%3A%20$experiencia%0A%F0%9F%97%A3%EF%B8%8F%20Meu%20n%C3%ADvel%20de%20conversa%C3%A7%C3%A3o%3A%20$nivel%0A%F0%9F%91%A5%20Modalidade%3A%20*$modalidade*%0A%E2%8F%B0%20Plano%3A%20%20*$plano*%0A%F0%9F%93%86%20Dias%20dispon%C3%ADveis%3A%20${dias.join('%20')}%0A%F0%9F%8C%83%20No%20per%C3%ADodo%3A%20$periodo%0A%F0%9F%8C%8E%20Minha%20localiza%C3%A7%C3%A3o%3A%20$localizacao%0A%0APodem%20me%20ajudar%20com%20os%20pr%C3%B3ximos%20passos%3F';
+    return '''
+Olá, meu nome é Fulano! Acabei de preencher o formulário da Dibs e gostaria de seguir com o atendimento 🤍 
+
+
+Aqui estão minhas escolhas:
+
+📍 Minha motivação: $motivacao
+📘 Minha experiencia: $experiencia
+🗣️ Meu nível de conversação: $nivel
+🚫 Minha dificuldade: $dificuldade
+👥 Modalidade escolhida: $modalidade 
+⏰ Plano escolhido: $plano
+📆 Dias disponíveis: ${dias.join(', ')}
+🌃 No período: $periodo
+🌎 Minha localização: $localizacao
+
+
+Podem me ajudar com os próximos passos?
+''';
   }
 }
 
