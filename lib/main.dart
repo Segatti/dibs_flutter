@@ -3955,7 +3955,7 @@ class CadastroDibs {
 
   String toWhatsappMessage() {
     return '''
-Olá, meu nome é Fulano! Acabei de preencher o formulário da Dibs e gostaria de seguir com o atendimento 🤍 
+Olá, meu nome é $nome! Acabei de preencher o formulário da Dibs e gostaria de seguir com o atendimento.
 
 
 Aqui estão minhas escolhas:
