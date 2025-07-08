@@ -301,7 +301,7 @@ class _TelaNomeState extends State<_TelaNome> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Inglês ao vivo para quem quer falar de verdade',
+                          'Inglês para quem quer falar de verdade',
                           style: GoogleFonts.montserrat(
                             fontSize: 14,
                             color: Colors.white,
@@ -317,7 +317,7 @@ class _TelaNomeState extends State<_TelaNome> {
                           Navigator.pop(context);
                         }),
                         const SizedBox(height: 16),
-                        _DialogButton('Planner de inglês online', () {
+                        _DialogButton('Planner de estudos online', () {
                           launchUrlString(
                             "https://hotm.art/plannerdeingles",
                             mode: LaunchMode.externalApplication,
@@ -378,25 +378,18 @@ class _TelaNomeState extends State<_TelaNome> {
           ),
           const SizedBox(height: 32),
           Text(
-            'Sua fluência em inglês começa aqui.',
+            'Sua fluência em inglês começa aqui',
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                   mobile: 36, tablet: 40, desktop: 60),
               fontWeight: FontWeight.bold,
               color: AppColor.primary,
               height: 1,
-              shadows: [
-                Shadow(
-                  color: Colors.black.withValues(alpha: .4),
-                  offset: const Offset(3, 3),
-                  blurRadius: 0,
-                ),
-              ],
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Nos diga como prefere aprender e nós te conectamos com a turma certa para você.',
+            'Nos diga como você prefere aprender e nós te conectamos com a turma certa',
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveFontSize(context,
                   mobile: 16, tablet: 17, desktop: 18),
@@ -2460,9 +2453,9 @@ class _TelaModalidadeState extends State<_TelaModalidade> {
     'Aula Individual',
   ];
   final List<String> valores = [
-    'A partir de R\$ 447,99',
-    'A partir de R\$ 895,98',
-    'A partir de R\$ 1.791,96',
+    'A partir de R\$ 447,99 mensal',
+    'A partir de R\$ 895,98 mensal',
+    'A partir de R\$ 1.791,96 mensal',
   ];
 
   @override
