@@ -3260,7 +3260,7 @@ class _TelaDisponibilidadeState extends State<_TelaDisponibilidade> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Nos diga o que funciona melhor pra você',
+            'Nos diga o que funciona melhor para você',
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                   mobile: 28, tablet: 32, desktop: 36),
@@ -3419,7 +3419,7 @@ class _TelaDisponibilidadeState extends State<_TelaDisponibilidade> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Nos diga o que funciona melhor pra você',
+                'Nos diga o que funciona melhor para você',
                 style: GoogleFonts.montserrat(
                   fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                       mobile: 28, tablet: 32, desktop: 36),
