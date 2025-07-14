@@ -488,25 +488,18 @@ class _TelaNomeState extends State<_TelaNome> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Sua fluência em inglês\ncomeça aqui.',
+                'Sua fluência em inglês\ncomeça aqui',
                 style: GoogleFonts.montserrat(
                   fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                       mobile: 36, tablet: 40, desktop: 60),
                   fontWeight: FontWeight.bold,
                   color: AppColor.primary,
                   height: 1,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withValues(alpha: .4),
-                      offset: const Offset(3, 3),
-                      blurRadius: 0,
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Nos diga como prefere aprender e nós te conectamos com a turma certa para você.',
+                'Nos diga como você prefere aprender e nós te conectamos com a turma certa',
                 style: GoogleFonts.montserrat(
                   fontSize: ResponsiveUtils.getResponsiveFontSize(context,
                       mobile: 16, tablet: 17, desktop: 18),
@@ -631,9 +624,9 @@ class _TelaMetodologia extends StatelessWidget {
                 children: [
                   Text(
                     isMobile
-                        ? 'Na Dibs, aprender inglês não é sobre decorar regras ou repetir frases prontas.'
-                        : 'Na Dibs, aprender inglês não é sobre\ndecorar regras ou repetir frases prontas.',
-                    textAlign: TextAlign.justify,
+                        ? 'Na Dibs, aprender inglês não é sobre decorar regras ou repetir frases prontas'
+                        : 'Na Dibs, aprender inglês não é sobre\ndecorar regras ou repetir frases prontas',
+                    textAlign: TextAlign.left,
                     style: GoogleFonts.montserrat(
                       height: 1,
                       fontSize: ResponsiveUtils.getResponsiveTitleFontSize(
@@ -780,12 +773,12 @@ class _TelaEstrutura extends StatelessWidget {
   Widget _buildMobileLayout(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'Aqui você conta com uma estrutura completa',
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                   mobile: 28, tablet: 32, desktop: 40),
@@ -794,13 +787,15 @@ class _TelaEstrutura extends StatelessWidget {
             ),
           ),
           // const SizedBox(height: 32),
-          SizedBox(
-            width: 200,
-            height: 200,
-            child: Lottie.asset(
-              LottiesAsset.lottie1,
-              fit: BoxFit.fill,
-              addRepaintBoundary: true,
+          Center(
+            child: SizedBox(
+              width: 200,
+              height: 200,
+              child: Lottie.asset(
+                LottiesAsset.lottie1,
+                fit: BoxFit.fill,
+                addRepaintBoundary: true,
+              ),
             ),
           ),
           // const SizedBox(height: 32),
@@ -816,19 +811,19 @@ class _TelaEstrutura extends StatelessWidget {
           const SizedBox(height: 24),
           _beneficio(
             '📚 20 aulas por nível',
-            'Estrutura clara para evoluir com segurança.',
+            '',
           ),
           _beneficio(
             '🗂️ Materiais em PDF',
-            'Conteúdo prático para estudar onde quiser.',
+            '',
           ),
           _beneficio(
             '📅 Planner de estudos online',
-            'Organização simples e eficaz para sua rotina.',
+            '',
           ),
           _beneficio(
             '🌐 Atividades extras na sala virtual',
-            'Exercícios para reforçar seu aprendizado.',
+            '',
           ),
           const SizedBox(height: 16),
           SizedBox(
@@ -984,20 +979,21 @@ class _TelaEstrutura extends StatelessWidget {
               ),
             ],
           ),
-          const Gap(4),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  subtitulo,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    color: Colors.white,
+          if (subtitulo.isNotEmpty) const Gap(4),
+          if (subtitulo.isNotEmpty)
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    subtitulo,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
         ],
       ),
     );
@@ -1363,6 +1359,7 @@ class _TelaExperienciaState extends State<_TelaExperiencia> {
     'Nunca estudei',
     'Sim, mas parei',
     'Estou estudando no momento',
+    'Não tenho experiência nenhuma',
   ];
 
   @override
@@ -1753,7 +1750,7 @@ class _TelaNivelState extends State<_TelaNivel> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Qual é o seu nível de conversação?',
+            'Do Básico ao Avançado, cada nível é um degrau rumo a fluência',
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                   mobile: 28, tablet: 32, desktop: 40),
@@ -1857,7 +1854,7 @@ class _TelaNivelState extends State<_TelaNivel> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Qual é o seu nível de conversação?',
+                  'Do Básico ao Avançado, cada nível é um degrau rumo a fluência',
                   style: GoogleFonts.montserrat(
                     fontSize: ResponsiveUtils.getResponsiveTitleFontSize(
                         context,
@@ -2114,6 +2111,7 @@ class _TelaDificuldadeState extends State<_TelaDificuldade> {
     'Tenho vergonha de errar',
     'Faltam palavras na hora de falar',
     'Não tenho dificuldade',
+    'Outros',
   ];
 
   @override
@@ -2873,7 +2871,7 @@ class _TelaPlanoState extends State<_TelaPlano> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Cada formato tem seu valor. E todos funcionam',
+            'Cada formato tem o seu valor, e todos funcionam',
             style: GoogleFonts.montserrat(
               fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                   mobile: 28, tablet: 32, desktop: 40),
@@ -2976,7 +2974,7 @@ class _TelaPlanoState extends State<_TelaPlano> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Cada formato tem seu valor. E todos funcionam',
+                  'Cada formato tem o seu valor, e todos funcionam',
                   style: GoogleFonts.montserrat(
                     fontSize: ResponsiveUtils.getResponsiveTitleFontSize(
                         context,
@@ -3780,7 +3778,7 @@ class _TelaFinalState extends State<_TelaFinal> {
             ),
             const SizedBox(height: 32),
             Text(
-              'Agora é só dar o próximo passo. O nosso time já está pronto para receber você! ✨',
+              'Agora é só dar o próximo passo.\nO nosso time já está pronto para receber você! ✨',
               style: GoogleFonts.montserrat(
                 fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                     mobile: 20, tablet: 24, desktop: 32),
@@ -3878,7 +3876,7 @@ class _TelaFinalState extends State<_TelaFinal> {
               ),
               const SizedBox(height: 80),
               Text(
-                'Agora é só dar o próximo passo. O nosso time já está pronto para receber você! ✨',
+                'Agora é só dar o próximo passo.\nO nosso time já está pronto para receber você! ✨',
                 style: GoogleFonts.montserrat(
                   fontSize: ResponsiveUtils.getResponsiveTitleFontSize(context,
                       mobile: 20, tablet: 24, desktop: 32),
