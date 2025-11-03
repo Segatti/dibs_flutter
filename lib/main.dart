@@ -312,14 +312,14 @@ class _TelaNomeState extends State<_TelaNome> {
                         _DialogButton('Aula de inglês ao vivo', () {
                           Navigator.pop(context);
                         }),
-                        const SizedBox(height: 16),
-                        _DialogButton('Curso de inglês para viagem', () {
-                          Navigator.pop(context);
-                        }),
+                        // const SizedBox(height: 16),
+                        // _DialogButton('Curso de inglês para viagem', () {
+                        //   Navigator.pop(context);
+                        // }),
                         const SizedBox(height: 16),
                         _DialogButton('Planner de estudos online', () {
                           launchUrlString(
-                            "https://hotm.art/plannerdeingles",
+                            "https://plannerdibs2026.my.canva.site/",
                             mode: LaunchMode.externalApplication,
                           );
                         }),

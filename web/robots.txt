@@ -1,0 +1,21 @@
+# robots.txt para Dibs - Curso de Inglês Online
+
+User-agent: *
+Allow: /
+
+# Permitir rastreamento de recursos estáticos
+Allow: /icons/
+Allow: /assets/
+Allow: /flutter_bootstrap.js
+
+# Bloquear arquivos de configuração e privados
+Disallow: /site.webmanifest
+Disallow: /*.json$
+Disallow: /favicon.ico
+
+# Sitemap (ajuste a URL quando tiver o domínio definitivo)
+Sitemap: https://www.dibs.com.br/sitemap.xml
+
+# Crawl-delay opcional para evitar sobrecarga do servidor
+Crawl-delay: 1
+
