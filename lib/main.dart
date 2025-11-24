@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:confetti/confetti.dart';
 import 'package:dibs_flutter/app_color.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,10 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'models/lotties_asset.dart';
+
+double _percentualPromocional = 10;
+bool _mostrarFaixaBlackWeek =
+    true; // Flag para ativar/desativar a faixa Black Week
 
 // Sistema de responsividade
 class ResponsiveBreakpoints {
@@ -205,14 +211,158 @@ class _DibsSiteState extends State<DibsSite> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 400),
-          transitionBuilder: (child, animation) => FadeTransition(
-            opacity: animation,
-            child: child,
+      body: Column(
+        children: [
+          const BlackWeekBanner(),
+          Expanded(
+            child: SafeArea(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                transitionBuilder: (child, animation) => FadeTransition(
+                  opacity: animation,
+                  child: child,
+                ),
+                child: getPage(),
+              ),
+            ),
           ),
-          child: getPage(),
+        ],
+      ),
+    );
+  }
+}
+
+// Widget de faixa Black Week
+class BlackWeekBanner extends StatefulWidget {
+  const BlackWeekBanner({super.key});
+
+  @override
+  State<BlackWeekBanner> createState() => _BlackWeekBannerState();
+}
+
+class _BlackWeekBannerState extends State<BlackWeekBanner>
+    with SingleTickerProviderStateMixin {
+  int _currentIndex = 0;
+  int _previousIndex = 1;
+  bool _isAnimating = false;
+  Timer? _timer;
+  late AnimationController _animationController;
+  late Animation<double> _slideAnimation;
+
+  final List<String> _textos = [
+    'BLACK WEEK DA DIBS',
+    'TODOS OS CURSOS COM 10% OFF',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _slideAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (mounted) {
+        setState(() {
+          _previousIndex = _currentIndex;
+          _currentIndex = (_currentIndex + 1) % _textos.length;
+          _isAnimating = true;
+        });
+        _animationController.forward(from: 0.0).then((_) {
+          if (mounted) {
+            setState(() {
+              _isAnimating = false;
+            });
+            _animationController.reset();
+          }
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_mostrarFaixaBlackWeek) {
+      return const SizedBox.shrink();
+    }
+
+    final fontSize = ResponsiveUtils.isMobile(context) ? 20.0 : 28.0;
+    final textStyle = GoogleFonts.montserrat(
+      fontSize: fontSize,
+      fontWeight: FontWeight.bold,
+      color: const Color(0xFFFF9845), // Laranja
+    );
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      color: const Color(0xFF0A1E3A), // Azul bem escuro
+      child: Center(
+        child: SizedBox(
+          height: fontSize * 1.2,
+          child: _isAnimating
+              ? AnimatedBuilder(
+                  animation: _slideAnimation,
+                  builder: (context, child) {
+                    // Durante a animação: mostra ambos os textos
+                    return Stack(
+                      alignment: Alignment.center,
+                      clipBehavior: Clip.hardEdge,
+                      children: [
+                        // Texto saindo (para a esquerda)
+                        Transform.translate(
+                          offset: Offset(
+                              -_slideAnimation.value *
+                                  MediaQuery.of(context).size.width,
+                              0),
+                          child: Opacity(
+                            opacity: 1.0 - _slideAnimation.value,
+                            child: Text(
+                              _textos[_previousIndex],
+                              style: textStyle,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        // Texto entrando (da direita)
+                        Transform.translate(
+                          offset: Offset(
+                              (1.0 - _slideAnimation.value) *
+                                  MediaQuery.of(context).size.width,
+                              0),
+                          child: Opacity(
+                            opacity: _slideAnimation.value,
+                            child: Text(
+                              _textos[_currentIndex],
+                              style: textStyle,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                )
+              : Text(
+                  _textos[_currentIndex],
+                  style: textStyle,
+                  textAlign: TextAlign.center,
+                ),
         ),
       ),
     );
@@ -267,74 +417,81 @@ class _TelaNomeState extends State<_TelaNome> {
           builder: (_) {
             return Dialog.fullscreen(
               backgroundColor: AppColor.primary,
-              child: Center(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 32),
-                        SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: SvgPicture.asset(
-                            "assets/icons/dibs.svg",
-                            colorFilter: const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
-                            ),
+              child: Column(
+                children: [
+                  const BlackWeekBanner(),
+                  Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 32),
+                              SizedBox(
+                                height: 150,
+                                width: 150,
+                                child: SvgPicture.asset(
+                                  "assets/icons/dibs.svg",
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 32),
+                              Text(
+                                'Dibs Online English School',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Inglês para quem quer falar de verdade',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 36),
+                              _DialogButton('Aula de inglês ao vivo', () {
+                                Navigator.pop(context);
+                              }),
+                              // const SizedBox(height: 16),
+                              // _DialogButton('Curso de inglês para viagem', () {
+                              //   Navigator.pop(context);
+                              // }),
+                              const SizedBox(height: 16),
+                              _DialogButton('Planner de estudos 2026', () {
+                                launchUrlString(
+                                  "https://plannerdibs2026.my.canva.site/",
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }),
+                              const SizedBox(height: 16),
+                              _DialogButton('Spotify Dibs', () {
+                                launchUrlString(
+                                  "https://open.spotify.com/playlist/591Anp20c5C2So0EY6dIJn?si=1Ig5xaiNRlCqy2bczKAZHg",
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }),
+                              const SizedBox(height: 32),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 32),
-                        Text(
-                          'Dibs Online English School',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Inglês para quem quer falar de verdade',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 36),
-                        _DialogButton('Aula de inglês ao vivo', () {
-                          Navigator.pop(context);
-                        }),
-                        // const SizedBox(height: 16),
-                        // _DialogButton('Curso de inglês para viagem', () {
-                        //   Navigator.pop(context);
-                        // }),
-                        const SizedBox(height: 16),
-                        _DialogButton('Planner de estudos 2026', () {
-                          launchUrlString(
-                            "https://plannerdibs2026.my.canva.site/",
-                            mode: LaunchMode.externalApplication,
-                          );
-                        }),
-                        const SizedBox(height: 16),
-                        _DialogButton('Spotify Dibs', () {
-                          launchUrlString(
-                            "https://open.spotify.com/playlist/591Anp20c5C2So0EY6dIJn?si=1Ig5xaiNRlCqy2bczKAZHg",
-                            mode: LaunchMode.externalApplication,
-                          );
-                        }),
-                        const SizedBox(height: 32),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             );
           },
@@ -2450,10 +2607,10 @@ class _TelaModalidadeState extends State<_TelaModalidade> {
     'Aula em Dupla',
     'Aula Individual',
   ];
-  final List<String> valores = [
-    'A partir de R\$ 447,99 mensal',
-    'A partir de R\$ 895,98 mensal',
-    'A partir de R\$ 1.791,96 mensal',
+  final List<double> valores = [
+    447.99,
+    895.98,
+    1791.96,
   ];
 
   @override
@@ -2750,13 +2907,33 @@ class _TelaModalidadeState extends State<_TelaModalidade> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    valores[i],
-                    style: GoogleFonts.montserrat(
-                      fontSize: 16,
-                      color: Colors.white,
+                  if (_percentualPromocional == 0)
+                    Text(
+                      'A partir de R\$ ${valores[i].toStringAsFixed(2)} mensal',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    )
+                  else ...[
+                    Text(
+                      'A partir de R\$ ${valores[i].toStringAsFixed(2)} mensal',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: Colors.grey,
+                        decorationThickness: 2,
+                      ),
                     ),
-                  ),
+                    Text(
+                      'A partir de R\$ ${(valores[i] * (1 - _percentualPromocional / 100)).toStringAsFixed(2)} mensal',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ]
                 ],
               ),
               Icon(
@@ -2798,23 +2975,124 @@ class _TelaPlanoState extends State<_TelaPlano> {
     'Você conclui o nível em 3 meses',
     'Você conclui o nível em 1 mês',
   ];
-  final List<List<String>> valores = [
-    [
-      'Parcelas de R\$ 447,99',
-      'Parcelas de R\$ 746,65',
-      'R\$ 2.239,95 ou 5x de R\$ 447,99',
-    ],
-    [
-      'Parcelas de R\$ 895,98',
-      'Parcelas de R\$ 1.493,30',
-      'R\$ 4.479,90 ou 5x de R\$ 895,98',
-    ],
-    [
-      'Parcelas de R\$ 1.791,96',
-      'Parcelas de R\$ 2.986,60',
-      'R\$ 8.959,80 ou 5x de R\$ 1.791,96',
-    ],
+  // Valores base (sem desconto)
+  final List<List<double>> valoresBase = [
+    [447.99, 746.65, 2239.95],
+    [895.98, 1493.30, 4479.90],
+    [1791.96, 2986.60, 8959.80],
   ];
+
+  // Função para formatar valor monetário
+  String _formatarValor(double valor) {
+    final valorFormatado = valor.toStringAsFixed(2);
+    final partes = valorFormatado.split('.');
+    final parteInteira = partes[0];
+    final parteDecimal = partes[1];
+
+    // Adiciona pontos de milhar
+    String parteInteiraFormatada = '';
+    for (int i = parteInteira.length - 1; i >= 0; i--) {
+      parteInteiraFormatada = parteInteira[i] + parteInteiraFormatada;
+      if ((parteInteira.length - i) % 3 == 0 && i > 0) {
+        parteInteiraFormatada = '.$parteInteiraFormatada';
+      }
+    }
+
+    return 'R\$ $parteInteiraFormatada,$parteDecimal';
+  }
+
+  // Função para obter o texto formatado do valor com desconto
+  Widget _obterTextoValor(int modalidadeIndex, int planoIndex) {
+    final valorBase = valoresBase[modalidadeIndex][planoIndex];
+
+    if (_percentualPromocional == 0) {
+      // Sem desconto, retorna apenas o texto simples
+      if (planoIndex == 2) {
+        // Último valor: valor cheio com parcelas
+        final valorCheio = valorBase;
+        final valorParcela = valoresBase[modalidadeIndex][0];
+        return Text(
+          '${_formatarValor(valorCheio)} ou 5x de ${_formatarValor(valorParcela)}',
+          style: GoogleFonts.montserrat(
+            fontSize: 19,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      } else {
+        // Parcelas simples
+        return Text(
+          'Parcelas de ${_formatarValor(valorBase)}',
+          style: GoogleFonts.montserrat(
+            fontSize: 19,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      }
+    } else {
+      // Com desconto - valor cortado em cima, valor com desconto embaixo
+      if (planoIndex == 2) {
+        // Último valor: aplicar desconto apenas no valor cheio
+        final valorCheioOriginal = valorBase;
+        final valorCheioComDesconto =
+            valorCheioOriginal * (1 - _percentualPromocional / 100);
+        final valorParcela = valoresBase[modalidadeIndex][0];
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${_formatarValor(valorCheioOriginal)} ou 5x de ${_formatarValor(valorParcela)}',
+              style: GoogleFonts.montserrat(
+                fontSize: 19,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.lineThrough,
+                decorationColor: Colors.grey,
+                decorationThickness: 2,
+              ),
+            ),
+            Text(
+              '${_formatarValor(valorCheioComDesconto)} ou 5x de ${_formatarValor(valorParcela)}',
+              style: GoogleFonts.montserrat(
+                fontSize: 19,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        );
+      } else {
+        // Parcelas: aplicar desconto
+        final valorComDesconto = valorBase * (1 - _percentualPromocional / 100);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Parcelas de ${_formatarValor(valorBase)}',
+              style: GoogleFonts.montserrat(
+                fontSize: 19,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.lineThrough,
+                decorationColor: Colors.grey,
+                decorationThickness: 2,
+              ),
+            ),
+            Text(
+              'Parcelas de ${_formatarValor(valorComDesconto)}',
+              style: GoogleFonts.montserrat(
+                fontSize: 19,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        );
+      }
+    }
+  }
 
   final List<String> modalidades = [
     'Aula em Grupo (máx. 4 pessoas)',
@@ -3136,20 +3414,7 @@ class _TelaPlanoState extends State<_TelaPlano> {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            valores[modalidadeIndex][i],
-                            style: GoogleFonts.montserrat(
-                              fontSize: 19,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    _obterTextoValor(modalidadeIndex, i),
                   ],
                 ),
               ),
