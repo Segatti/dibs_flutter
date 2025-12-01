@@ -14,9 +14,9 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'models/lotties_asset.dart';
 
-double _percentualPromocional = 10;
+double _percentualPromocional = 0;
 bool _mostrarFaixaBlackWeek =
-    true; // Flag para ativar/desativar a faixa Black Week
+    false; // Flag para ativar/desativar a faixa Black Week
 
 // Sistema de responsividade
 class ResponsiveBreakpoints {
