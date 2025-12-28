@@ -473,7 +473,7 @@ class _TelaNomeState extends State<_TelaNome> {
                               const SizedBox(height: 16),
                               _DialogButton('Planner de estudos 2026', () {
                                 launchUrlString(
-                                  "https://plannerdibs2026.my.canva.site/",
+                                  "https://plannerdibs2026.my.canva.site/n-o-um-curso-de-ingl-s",
                                   mode: LaunchMode.externalApplication,
                                 );
                               }),
